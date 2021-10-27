@@ -1,0 +1,32 @@
+version: '3.1'
+services:
+  laravel:
+    build: .
+    ports:
+      - "9000:80"
+    volumes:
+      - ./application:/var/www/application
+      - ./bugsnag:/var/www/bugsnag
+      - ./bundles:/var/www/bundles
+      - ./laravel:/var/www/laravel
+      - ./resources:/var/www/resources
+      - ./ssl:/var/www/ssl
+      - ./storage:/var/www/storage
+      - ./data:/var/www/data
+      - ./paths.php:/var/www/paths.php
+      - ./public_html:/var/www/html
+  db:
+    image: mysql:5.6
+    container_name: database
+    ports:
+      - "4306:3306"
+    environment:
+        MYSQL_ROOT_HOST: "0.0.0.0"
+        # MYSQL_ROOT_HOST: '%'
+        MYSQL_ROOT_PASSWORD: 'pass'
+        MYSQL_DATABASE: 'db'
+        MYSQL_USER: 'user'
+        MYSQL_PASSWORD: 'pass'
+    volumes:
+      - ./data/mysql:/var/lib/mysql:rw,delegated
+    restart: always
