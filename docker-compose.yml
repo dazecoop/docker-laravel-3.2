@@ -16,7 +16,7 @@ services:
       - ./paths.php:/var/www/paths.php
       - ./public_html:/var/www/html
   db:
-    image: mysql:5.6
+    image: mariadb:10.5.8
     container_name: database
     ports:
       - "4306:3306"
